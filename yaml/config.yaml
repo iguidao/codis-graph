@@ -1,0 +1,20 @@
+local:
+    addr: 127.0.0.1:8090
+    runmode: debug
+    crongraph: "*/5 * * * *"
+    croncodis: "*/5 * * * *"
+    logpath: "./logs/codisgraph.log"
+    codisurl: "http://{CODIS-dashboard-URL}/"
+
+mysql:
+    name: codisdb
+    addr: 127.0.0.1:3308
+    username: root
+    password: 123456
+
+elasticsearch:
+    addr: http://{IP}:9200
+    index: codis-proxy
+    doctype: codis-proxy
+    user: admin
+    password: xxxxxxxxxxxxx
