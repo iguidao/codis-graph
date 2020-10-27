@@ -18,3 +18,4 @@ elasticsearch:
     doctype: codis-proxy
     user: admin
     password: xxxxxxxxxxxxx
+
