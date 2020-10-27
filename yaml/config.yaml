@@ -17,5 +17,5 @@ elasticsearch:
     index: codis-proxy
     doctype: codis-proxy
     user: admin
-    password: xxxxxxxxxxxxx
+    password: {PASSWORD} 
 
