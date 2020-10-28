@@ -1,5 +1,6 @@
 ## 介绍
-大家用过redis，不知道用没用过codis，根据codis做了一个调用关系图，可以明确知道谁在使用codis
+大家用过redis，不知道用没用过codis，根据codis做了一个调用关系图，可以明确知道谁在使用codis。
+结果会显示哪个IP地址在请求哪个codis集群
 
 ### 架构图
 ![](https://github.com/lightsre/codisgraph/blob/master/screenshots/codisgraph-framework.png)
