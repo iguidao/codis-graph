@@ -72,6 +72,9 @@ max_procs: 1
 
   ```
 /etc/filebeat/input.conf.d/codis-proxy.yml 文件
+
+
+
 - type: log
   enabled: true
   paths:
