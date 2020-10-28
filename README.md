@@ -1,6 +1,9 @@
 ## 介绍
 大家用过redis，不知道用没用过codis，根据codis做了一个调用关系图，可以明确知道谁在使用codis
 
+### 架构图
+![](https://github.com/lightsre/codisgraph/blob/master/screenshots/codisgraph-framework.png)
+
 ### 开发环境
 
 - running inside Mac
@@ -20,13 +23,18 @@
 
 ### 前期准备
 1. 修改yaml下的config.yaml配置文件
+  ```
 local 下的 codisurl 配置为codis的fe页面地址，其中estimediff为获取es数据的时间间隔，单位s
 mysql 下的链接配置
 elasticsearch 下的链接配置
+  ```
 
 2. 所有codis的proxy节点都要配置filebeat，收集proxy信息，下面是参考配置
-/etc/filebeat/filebeat.yml 文件
+
   ```
+/etc/filebeat/filebeat.yml 文件内容如下
+
+
 filebeat.config.inputs:
   enabled: true
   path: /etc/filebeat/input.conf.d/*.yml
@@ -61,8 +69,9 @@ output.elasticsearch:
   enabled: false
 max_procs: 1
   ```
-/etc/filebeat/input.conf.d/codis-proxy.yml 文件
+
   ```
+/etc/filebeat/input.conf.d/codis-proxy.yml 文件
 - type: log
   enabled: true
   paths:
