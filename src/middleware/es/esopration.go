@@ -7,30 +7,19 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
-	"strconv"
 	"time"
 
 	"github.com/elastic/go-elasticsearch/v6/esapi"
 )
 
 // 按时间聚合ES的查询条件
-func EsScrollTime(starttime, endtime string) (map[string]interface{}, string, string) {
+func EsScrollTime(starttime, endtime int64) (map[string]interface{}, string, string) {
 	EsdocType := cfg.Get_Elasticsearch("doctype")
 	Esindex := cfg.Get_Elasticsearch("index")
-	// today := time.Now().Format("2006.01.02")
 	IndexName := Esindex + "-" + "*"
 
-	starttime64, err := strconv.ParseInt(starttime, 10, 64)
-	if err != nil {
-		log.Println("解析时间失败：", err)
-	}
-	endtime64, err := strconv.ParseInt(endtime, 10, 64)
-	if err != nil {
-		log.Println("解析时间失败：", err)
-	}
-
-	stm := time.Unix((starttime64 - 28800), 0)
-	etm := time.Unix((endtime64 - 28800), 0)
+	stm := time.Unix((starttime - 28800), 0)
+	etm := time.Unix((endtime - 28800), 0)
 	esstart := stm.Format("2006-01-02T15:04:05.000Z")
 	esend := etm.Format("2006-01-02T15:04:05.000Z")
 	query := map[string]interface{}{

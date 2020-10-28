@@ -2,21 +2,31 @@ package oncron
 
 import (
 	"log"
+	"strconv"
+	"time"
 
+	"codisgraph/src/cfg"
 	"codisgraph/src/middleware/es"
+	"codisgraph/src/middleware/mysql"
 )
 
 func CronGraph() {
-
+	log.Println("start cron codisgraph")
 	CodisCreate := make(map[string]string)
 	CodisClose := make(map[string]string)
-	starttime := "1603798260"
-	endtime := "1603798320"
+	endtime := time.Now().Unix()
+	difftime := cfg.Get_Local("estimediff")
+	esdifftime, err := strconv.ParseInt(difftime, 10, 64)
+	if err != nil {
+		log.Println("解析时间失败：", err)
+	}
+	starttime := endtime - esdifftime
 	query, EsdocType, IndexName := es.EsScrollTime(starttime, endtime)
 	SearchStatus, SearchResult := es.EsSrollID(query, EsdocType, IndexName)
 	if SearchStatus == "NotFound" {
 		log.Println("NotFound", SearchStatus, SearchResult)
 	}
+
 	CodisCreate, CodisClose = DateHandle(CodisCreate, CodisClose, SearchResult)
 
 	scrollquery := es.EsScrollQuery(SearchResult.ScrollId)
@@ -35,6 +45,7 @@ func CronGraph() {
 			break
 		}
 	}
+
 	DBWrite(CodisCreate, CodisClose)
 
 }
@@ -68,14 +79,21 @@ func DateHandle(CodisCreate, CodisClose map[string]string, esnum es.EsData) (map
 }
 
 func DBWrite(CodisCreate, CodisClose map[string]string) {
-	for ckey, cval := range CodisClose {
-
-		log.Println(ckey, cval)
+	for ckey, _ := range CodisClose {
+		if mysql.DB.GraphExist(ckey) == true {
+			mysql.DB.GraphDel(ckey)
+		}
 	}
-	log.Println("this create codis")
 	for ekey, eval := range CodisCreate {
-		log.Println(ekey, eval)
+		codisname, codisid := mysql.DB.CodisProxyLike(eval)
+		if mysql.DB.GraphExist(ekey) == false {
+			mysql.DB.GraphWrite(ekey, codisname, codisid)
+		} else {
+			mysql.DB.GraphUpdate(ekey, codisname, codisid)
+		}
+
 	}
+
 }
 func checkError(err error) {
 	if err != nil {

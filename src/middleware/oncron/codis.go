@@ -5,10 +5,12 @@ import (
 	"codisgraph/src/middleware/codisapi"
 	"codisgraph/src/middleware/mysql"
 	"fmt"
+	"log"
 	"strings"
 )
 
 func CronCodis() {
+	log.Println("start cron codis")
 	codisurl := cfg.Get_Local("codisurl")
 	CodisCluster := codisapi.GetCluster(codisurl)
 	var CodisServer []string

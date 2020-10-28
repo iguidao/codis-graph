@@ -34,6 +34,5 @@ func Migrate() {
 	log.Println("start to auto migrate data schemas...")
 	DB.AutoMigrate(&CodisInfo{})
 	DB.AutoMigrate(&CodisGraph{})
-	//DB.Debug().AutoMigrate(&model.UserInfo{})
 	log.Println("auto migrate data schemas done.")
 }

@@ -22,6 +22,8 @@ type CodisInfo struct {
 
 type CodisGraph struct {
 	Base
-	ClientIp  string    `gorm:"size:255"`
-	CodisInfo CodisInfo `json:"codis_info"`
+	ClientIp    string `gorm:"size:255"`
+	ClName      string `gorm:"size:255"`
+	CodisInfoID uint
+	CodisInfo   CodisInfo
 }

@@ -1,0 +1,11 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /api/v1/health            --> codisgraph/src/http/v1.HealthCheck (3 handlers)
+[GIN-debug] GET    /api/v1/cookie            --> codisgraph/src/http/v1.Cookie (3 handlers)
+[GIN-debug] GET    /cgraph/v1/getall         --> codisgraph/src/http/v1.GetAll (3 handlers)
+[GIN-debug] Listening and serving HTTP on 127.0.0.1:8090
+[GIN] 2020/10/28 - 18:10:15 | 200 |   17.155232ms |       127.0.0.1 | GET      "/cgraph/v1/getall"

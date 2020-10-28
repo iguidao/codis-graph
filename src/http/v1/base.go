@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	//"oncall/src/cfg"
 )
 
 func HealthCheck(c *gin.Context) {

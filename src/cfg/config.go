@@ -50,6 +50,9 @@ func Get_Local(get_local string) string {
 	case "codisurl":
 		local_codisurl := viper.GetString("local.codisurl")
 		return local_codisurl
+	case "estimediff":
+		local_estimediff := viper.GetString("local.estimediff")
+		return local_estimediff
 	default:
 		return "noconfig"
 	}

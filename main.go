@@ -26,14 +26,15 @@ func main() {
 
 	c := cron.New()
 	//  创建定时任务，更新值班表
+
+	codiscrontime := cfg.Get_Local("croncodis")
+	c.AddFunc(codiscrontime, func() {
+		oncron.CronCodis()
+	})
 	graphcrontime := cfg.Get_Local("crongraph")
 	c.AddFunc(graphcrontime, func() {
 		oncron.CronGraph()
 	})
-	// codiscrontime := cfg.Get_Local("croncodis")
-	// c.AddFunc(codiscrontime, func() {
-	// 	oncron.CronCodis()
-	// })
 
 	c.Start()
 
