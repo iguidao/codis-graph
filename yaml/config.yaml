@@ -14,8 +14,8 @@ mysql:
     password: 123456
 
 elasticsearch:
-    addr: http://172.30.1.1:9200
+    addr: http://172.30.1.3:9200
     index: codis-proxy
     doctype: codis-proxy
-    user: keep
+    user: root
     password: xxxxxxxxxxxxxxx
