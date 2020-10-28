@@ -10,7 +10,7 @@
 - go1.14.6
 
 ### 代码功能列表
-1. 查询codis链接 --- http://127.0.0.1:8090/cgraph/v1/getall
+1. 查询codis链接 --- 提供http的一个接口，可以查询codis的所有请求
 2. 定时获取codis集群信息 --- 通过codis-fe页面地址，抓取codis的所有集群信息
 3. 定时获取codis链接信息 --- 通过读取es数据，处理链接信息并存储mysql数据库
 
@@ -147,6 +147,18 @@ output {
 >\# go mod tidy
 >\# go run migrate.go -m=true
 >\# go run main.go
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /api/v1/health            --> codisgraph/src/http/v1.HealthCheck (3 handlers)
+[GIN-debug] GET    /api/v1/cookie            --> codisgraph/src/http/v1.Cookie (3 handlers)
+[GIN-debug] GET    /cgraph/v1/getall         --> codisgraph/src/http/v1.GetAll (3 handlers)
+[GIN-debug] Listening and serving HTTP on 127.0.0.1:8090
+
+等待5分钟，请求地址： http://127.0.0.1:8090/cgraph/v1/getall    
   ```
 
 ### 联系方式
