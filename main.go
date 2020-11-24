@@ -25,7 +25,7 @@ func main() {
 	log.Println("CodisGraph Server Starting")
 
 	c := cron.New()
-	//  创建定时任务，更新值班表
+	//  创建定时任务
 
 	codiscrontime := cfg.Get_Local("croncodis")
 	c.AddFunc(codiscrontime, func() {
