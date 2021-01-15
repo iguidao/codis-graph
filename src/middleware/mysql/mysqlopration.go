@@ -26,7 +26,7 @@ func (m *MySQL) CodisExist(cluster_name string) bool {
 
 func (m *MySQL) CodisProxyLike(Proxy_ip string) (string, uint) {
 	var codisinfo CodisInfo
-	m.Where("proxy_host LIKE ?", "%"+Proxy_ip+"%").First(&codisinfo)
+	m.Where("proxy_host LIKE ?", "%,"+Proxy_ip+",%").First(&codisinfo)
 
 	return codisinfo.ClusterName, codisinfo.ID
 }
